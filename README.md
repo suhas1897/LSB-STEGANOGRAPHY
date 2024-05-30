@@ -26,7 +26,7 @@ Ensure you have the following installed on your system:
 
 - **Prerequisites:** The section provides a link to download Python.
 - **Installation and Setup:** Instructions on how to navigate to the project folder using the terminal or command prompt.
-- **Running the Applications:** Separate commands are given to run both `app.py` and `app1.py`.
+- **Running the Applications:** Separate commands are given to run both `python app.py` and `python app1.py`.
 - **Accessing the Application:** Instructions on how to open the application in a web browser using localhost.
 - **Operations:** This is a placeholder where you can add any additional information about what users can do once the applications are running.
 
