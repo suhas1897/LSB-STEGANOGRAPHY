@@ -1,0 +1,162 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSB Steganography</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+<style>
+
+    /* css start */
+    body {
+    font: 400 1em/1.5 "Neuton";
+    background: #090d00;
+    color: rgba(255, 255, 255, .25);
+    text-align: center;
+    margin: 0;
+    position: relative; /* Ensure body is positioned relatively for absolute positioning */
+}
+
+header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    position: relative; /* Make container position relative for absolute positioning of button */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p {
+    text-transform: uppercase;
+    letter-spacing: .5em;
+    display: inline-block;
+    border: 4px double rgba(255, 255, 255, .25);
+    border-width: 4px 0;
+    padding: 1.5em 0em;
+    width: 40em;
+    margin: 0 auto;
+}
+
+span {
+    font: 700 4em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    padding: .25em 0 .325em;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 80px rgba(255, 255, 255, .5);
+    background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+}
+
+
+.choose {
+    background-color: #d52349;
+    padding: 15px 25px;
+    height: auto;
+    width: 220px;
+    border: none;
+    cursor: pointer;
+    border-radius: 124px;
+    font-size: 18px;
+    text-align: center;
+    margin: 20px auto; /* Center horizontally and add space below */
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+  width: 60%;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.upload-button{
+    color: #fff;
+}
+
+
+        #output {
+            margin-top: 100px;
+            color: aqua;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <p class="welcome-message">Welcome to Decoding Platform</p>
+                <p><span>LSB Steganography</span></p>
+
+    <h1>Secret Message Extractor</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <!-- <input type="file" id="fileInput" name="file"><br> -->
+        <!-- <button type="button" onclick="extractMessage()">Extract Message</button> -->
+
+        <div class="choose">
+            <label for="image-upload"  class="upload-button">Choose File</label>
+            <input type="file" id="image-upload" name="image" accept="image/*" required style="display: none;" />
+        </div>
+
+        <div class="button-box">
+            <button type="button" class="custom-btn" id="embed" onclick="extractMessage()">Embed Message</button>
+        </div>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        function extractMessage() {
+            var fileInput = document.getElementById('image-upload');
+            var file = fileInput.files[0];
+
+            if (file) {
+                var formData = new FormData();
+                formData.append('file', file);
+
+                fetch('/extract', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('output').textContent = data;
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                alert('Please select a file.');
+            }
+        }
+    </script>
+</body>
+</html>
