@@ -60,4 +60,4 @@ def extract_message():
 
 
 if __name__ == '__main__':
-    app1.run(debug=True, port=8080)
+    app1.run(debug=False, host = '0.0.0.0')
